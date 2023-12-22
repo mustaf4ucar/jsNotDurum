@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORTALAMA HESAP</title>
+
+<style>
+
+
+.kutu {
+
+
+            width:100%;
+            height: 130px;
+            text-align: center;
+            background:rgb(18, 171, 135);
+            padding:10px;
+}
+
+.sonuc {
+height: 100vh;
+width: 100%;
+background-color: whitesmoke;
+}
+
+#durum{ 
+font-size: 25px;
+
+}
+#tablo {
+height: 100px;
+width: 100%;
+background-color: darkgrey;
+border:5px double gray;
+padding: 0px;
+margin: 0 px;
+;
+}
+
+</style>
+
+
+</head>
+<body>
+   
+   <div class="kutu"> 
+     Adı :
+       <input type="text" id="isim" >
+
+    Soyadı :
+     <input type="text" id="soyisim" >
+    <br/> <br/> <br/> 
+     Vize :
+       <input type="text" id="vize" >
+
+    Final :
+     <input type="text" id="final" >
+     <input type="button" onclick="hesapla()" value="Kaydet">
+     <input type="button" onclick="temizle()" value="Sil">
+     <input type="button" onclick="document.location.reload(true)" value="Tabloyu Sil">
+   </div>
+
+ 
+
+
+<div  id="sonuc"></div>
+<div id="durum"></div>
+
+<script>
+function hesapla()
+{
+
+  const isim = document.querySelector("#isim").value;
+      const soyisim = document.querySelector("#soyisim").value;
+      const vize = Number(document.querySelector("#vize").value);
+      const final = Number(document.querySelector("#final").value);
+
+      const ort = Math.floor(vize * 0.4 + final * 0.6);
+      const durum = ort >= 60 ? "Geçti" : "Kaldı";
+
+      const satir = document.createElement("tr");
+
+      const adiHucre = document.createElement("td");
+      adiHucre.textContent = isim;
+      satir.appendChild(adiHucre);
+
+      const soyadiHucre = document.createElement("td");
+      soyadiHucre.textContent = soyisim;
+      satir.appendChild(soyadiHucre);
+
+      const vizeHucre = document.createElement("td");
+      vizeHucre.textContent = vize;
+      satir.appendChild(vizeHucre);
+
+      const finalHucre = document.createElement("td");
+      finalHucre.textContent = final;
+      satir.appendChild(finalHucre);
+
+      const ortalamaHucre = document.createElement("td");
+      ortalamaHucre.textContent = ort;
+      satir.appendChild(ortalamaHucre);
+
+      const durumHucre = document.createElement("td");
+      durumHucre.textContent = durum;
+      durumHucre.style.color = ort >= 60 ? "green" : "red";
+      satir.appendChild(durumHucre);
+
+      document.querySelector("#tablo").appendChild(satir);
+
+      satirSayisi++;
+      
+      
+      }
+//input silme
+function temizle()
+{
+  const isimInput = document.querySelector("#isim");
+  isimInput.value = "";
+  const soyisimInput = document.querySelector("#soyisim");
+  soyisimInput.value = "";
+  const vizeInput = document.querySelector("#vize");
+  vizeInput.value = "";
+  const finalInput = document.querySelector("#final");
+  finalInput.value = "";
+  document.querySelector("#sonuc").innerHTML = "";
+  document.querySelector("#durum").innerHTML= "";
+}
+
+/// otomatık butonsuz yazdırma
+/*document.querySelector("#isim").addEventListener("keyup",hesapla);
+document.querySelector("#soyisim").addEventListener("keyup",hesapla);
+document.querySelector("#vize").addEventListener("keyup",hesapla);
+document.querySelector("#final").addEventListener("keyup",hesapla);
+document.querySelector("#ort").addEventListener("keyup",hesapla);
+*/
+
+
+
+
+</script>
+
+<table  id="tablo">
+<tr> 
+<td> ADI</td>
+<td> SOYADI </td>
+<td> VİZE </td>
+<td> FİNAL </td>
+<td> ORTALAMA </td>
+<td> DURUM </td>
+</tr>
+</table>
+
+
+
+</body>
+</html>
